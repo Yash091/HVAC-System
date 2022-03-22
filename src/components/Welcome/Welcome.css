@@ -1,0 +1,155 @@
+.welcome-page{
+    background-color: #151515;
+    display: flex;
+    flex-direction: revert;
+    align-items: center;
+    justify-content: space-around;
+    width: 100%;
+    flex-wrap: wrap;
+    /* height: 100vh; */
+    min-height: 100vh;
+}
+
+.welcome-page.welcome-page .first {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+.welcome-page .second {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.welcome-page .heading{
+    width:100%;
+    padding-left: 17rem;
+}
+
+.welcome-page .head1{
+    color : white;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 40px;
+}
+
+.welcome-page .head2{
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 120%;
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 2rem;
+}
+
+.welcome-page .details .input-head{
+    /* font-family: 'Satoshi'; */
+    font-style: normal;
+    font-weight: 700;
+    font-size: 22px;
+    line-height: 40px;
+    margin-bottom: 0rem;
+    color: white;
+}
+
+.welcome-page .details .input-fields input{
+    border: none;
+    background-color:#151515;
+    width: 30rem;
+    height: 2.6rem;
+    font-size: 1rem;
+    border-bottom: 2px solid white;
+    margin-bottom:50px ;
+}
+
+
+
+.welcome-page .mode-head{
+    margin-top: 9.7rem;
+    margin-bottom: 1.2rem;
+    font-style: normal;
+    font-weight: 800;
+    font-size: 18px;
+    line-height: 120%;  
+    color: #FFFFFF;
+}
+
+.welcome-page .status-head{
+    margin-top: 2rem;
+    margin-bottom: 1.2rem;
+    font-style: normal;
+    font-weight: 800;
+    font-size: 18px;
+    line-height: 120%;  
+    color: #FFFFFF;
+}
+
+.welcome-page .fan-speed{
+    font-style: normal;
+    font-weight: 800;
+    font-size: 18px;
+    line-height: 120%;  
+    color: #FFFFFF;
+}
+
+.welcome-page .mode-btns{
+    display: flex;
+    flex-direction: row;
+    column-gap: 2rem;
+}
+
+.welcome-page .modes{
+    border: none;
+    background-color: #1684F8;
+    box-shadow: 0px 8px 16px -1px rgba(15, 35, 177, 0.15);
+    border-radius: 6px;
+    width : 134px;
+    height : 51px;
+    /* margin: 0px 32px; */
+    color:white;
+}
+
+.welcome-page .status-btns{
+    display: flex;
+    flex-direction: row;
+    column-gap: 2rem;
+}
+
+.welcome-page .stat{
+    border: 2px solid #1684F8;
+    box-sizing: border-box;
+    border-radius: 6px;
+    /* margin: 0px 32px; */
+    color: #1684F8;
+    background-color: #151515;
+    width: 216px;
+    height: 51px;
+}
+
+.welcome-page .fan{
+    margin-top: 2rem;
+    display: flex;
+    width: 60%;
+    width: 60%;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+.submit-btn{
+    width: 500px;
+    height: 53px;
+    background: #0838E1;
+    box-shadow: 0px 4px 26px rgba(0, 0, 0, 0.25);
+    border-radius: 6px;
+    border: none;
+    color : white;
+    font-size: 26px;
+    margin-bottom: 2.5rem;
+    margin-top: 2.5rem;
+}
