@@ -1,11 +1,10 @@
 import React from "react";
 import "./Homepage.css";
-import homepic from "./homepic.png";
 import {useNavigate} from "react-router";
 
 function Homepage() {
 
-    const navigate = useNavigate();
+  const navigate = useNavigate();
   const toLogin = () => {
       navigate('/login');
   }

@@ -1,15 +1,8 @@
-import {React , useState} from 'react'
+import { React } from 'react'
 import "./Welcome.css";
 import { CircleSlider } from "react-circle-slider";
 
 const Welcome = () => {
-
-    const [value , setValue] = useState(0);
-    const handleChange = (value) => {
-        value++;
-        setValue(value);
-        console.log(value);
-    }
 
   return (
     <div className="welcome-page">
