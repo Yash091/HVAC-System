@@ -1,6 +1,5 @@
 import React from "react";
 import "./Homepage.css";
-// import homepic from "./homepic.png";
 import {useNavigate} from "react-router";
 
 function Homepage() {

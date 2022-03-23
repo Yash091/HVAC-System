@@ -105,13 +105,14 @@
 
 .welcome-page .modes{
     border: none;
-    background-color: #1684F8;
-    box-shadow: 0px 8px 16px -1px rgba(15, 35, 177, 0.15);
     border-radius: 6px;
     width : 134px;
     height : 51px;
     /* margin: 0px 32px; */
-    color:white;
+    box-shadow: 0px 8px 16px -1px rgba(15, 35, 177, 0.15);
+    border: 2px solid #1684F8;
+    background-color: black;
+    color: #1684F8;
 }
 
 .welcome-page .status-btns{
@@ -153,4 +154,13 @@
     font-size: 26px;
     margin-bottom: 2.5rem;
     margin-top: 2.5rem;
+}
+
+.color {
+    color: white!important;
+    background-color: #1684F8!important;
+}
+
+.hidden {
+    visibility: hidden!important;
 }
