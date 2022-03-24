@@ -32,24 +32,67 @@
   margin-top: 0.5rem;
 }
 
+.HVAC .list li {
+  display: inline;
+  list-style: none;
+}
+
+@media screen and (max-width: 600px) {
+  .HVAC .list li {
+      float: none;
+      list-style-position: outside;
+      margin: 0;
+  }
+}
+
 .HVAC .names {
   color: white;
+  display : flex;
   font-family: "Satoshi";
   font-style: normal;
   font-weight: 700;
-  font-size: 1.2rem;
   margin-bottom: 8rem;
+  -webkit-animation: glow 1s ease-in-out infinite alternate;
+  -moz-animation: glow 1s ease-in-out infinite alternate;
+  animation: glow 1s ease-in-out infinite alternate;
 }
+
+/* @keyframes glow {
+  from {
+    text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #fff, 0 0 50px #fff, 0 0 60px #fff, 0 0 70px #fff;
+  }
+  
+  to {
+    text-shadow: 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #fff, 0 0 50px #fff, 0 0 60px #fff, 0 0 70px #fff, 0 0 80px #fff;
+  }
+} */
+
+/* .names span{
+  /* width: 50px; 
+  text-align: center;
+  /* padding-bottom: -200px; 
+  font-size: 24px;
+} 
+*/
+
+.names{
+  display : flex;
+  flex-direction: row;
+  justify-content: center;
+  column-gap: 1rem;
+}
+
+
 
 .HVAC .loginButton {
   color: white;
-  width: 15rem;
+  width: 20rem;
   height: 3rem;
   background: #0838e1;
-  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.25);
+  box-shadow: 0px 4px 20px rgba(8, 56, 225, 0.6);
   border-radius: 6px;
   border: none;
-  cursor: pointer;
+  font-size: 18px;
 }
 
 .HVAC .image-container {

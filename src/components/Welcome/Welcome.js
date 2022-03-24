@@ -1,43 +1,47 @@
 import {React  , useState , useRef} from 'react';
 import "./Welcome.css";
 import { CircleSlider } from "react-circle-slider";
+import Final from '../final/Final';
+import { useNavigate } from 'react-router';
 
 const Welcome = () => {
+
+  const toFinal = useNavigate();
 
   const initial = {
       temperature : "",
       humidity : "",
       airQuality :"",
-      mode:"auto",
-      status:"on",
-      speed:"0",
+      mode: "auto",
+      status: "on",
+      speed: "0",
   };
 
-  const handleChange=(e)=>{
+  const handleChange = (e) => {
       setInput({...input,[e.target.name]:e.target.value})
   }
   const [input , setInput] = useState(initial);
   const [value, changeValue] = useState(0);
   
   const check = () => {
+
     if(!input.temperature || input.temperature < -50 || input.temperature > 50) {
       window.alert("Invalid Temperature Details");
       setInput({...input, temperature :""} )
-    }
-    if(!input.humidity || input.humidity < 0 || input.humidity > 100){
+    } else if(!input.humidity || input.humidity < 0 || input.humidity > 100){
       window.alert("Invalid Humidity Details");
       setInput({...input,humidity :""} )
-    }
-
-    if(!input.airQuality || input.airQuality < 0 || input.airQuality > 500){
+    } else if(!input.airQuality || input.airQuality < 0 || input.airQuality > 500){
       window.alert("Invalid Air Quality Details");
       setInput({...input,airQuality :""} )
-    }
-    
+    } else {
+      // console.log("Hello");
+      toFinal(`/final/?temp=${input.temperature}&humidity=${input.humidity}&airQuality=${input.airQuality}&mode=${input.mode}&status=${input.status}&speed=${input.speed}`);
+    } 
   }
 
   return (
-    <div className="welcome-page">
+    <div className="welcome-page"> 
       <div className="first">
         <div className="details">
           <div className="head1">Welcome to HVAC System</div>
@@ -87,15 +91,15 @@ const Welcome = () => {
           <div className="mode-btns">
             <button className={`modes auto ${input.mode==="auto" ? "color" : ""}`} name="auto" onClick={() => {
               setInput({...input , mode:"auto"})
-              console.log(input);
+              // console.log(input);
             }}>Auto</button>
             <button className={`modes winter ${input.mode==="winter" ? "color" : ""}`} name="winter" onClick={() => {
               setInput({...input , mode:"winter"})
-              console.log(input);
+              // console.log(input);
             }}>Winter</button>
             <button className={`modes summer ${input.mode==="summer" ? "color" : ""}`} name="summer" onClick={() => {
               setInput({...input , mode:"summer"})
-              console.log(input);
+              // console.log(input);
             }}>Summer</button>
           </div>
         </div>
@@ -132,6 +136,7 @@ const Welcome = () => {
         </div>
       </div>
       <button className="submit-btn" onClick={() => {check()}}>Submit</button>
+      {/* <Final input={input}/> */}
     </div>
   );
 }

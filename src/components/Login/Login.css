@@ -40,7 +40,7 @@
 }
 
 .login-page .form .input-head{
-    font-size: 1.5rem;
+    font-size: 1.4rem;
 }
 
 .login-page .input-fields input{
@@ -57,11 +57,12 @@
 
 .login-page .login-button{
     border: none;
-    width: 31rem;
+    width: 30rem;
     height : 3rem;
     background-color: #0838E1;
-    box-shadow: 0px 4px 26px rgba(0, 0, 0, 0.25);
+    box-shadow: 0px 4px 20px rgba(8, 56, 225, 0.4);
     border-radius: 6px;
     color : white;
+    font-size: 16px;
     margin-top: 3rem;
 }

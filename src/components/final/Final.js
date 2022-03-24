@@ -2,8 +2,92 @@ import React from 'react'
 import "./Final.css";
 import good from "./Good.png"
 import bad from "./Bad.png"
+import {useEffect} from "react"
+import {useLocation} from "react-router-dom"
+import img1 from "./1.png"
+import img2 from "./2.png"
+import img3 from "./3.png"
+import img4 from "./4.png"
+import img5 from "./5.png"
+import img6 from "./6.png"
 
-function Final() {
+const Final = () => {
+
+    const initial = {
+        quality: "0",
+        status: "on",
+        mode: "auto",
+        temperature : "",
+        airQuality : "",
+        humidity: "0",
+    }
+    
+    const search = useLocation().search;
+    const temp = new URLSearchParams(search).get('temp');
+    const airQuality = new URLSearchParams(search).get('airQuality');
+    const mode = new URLSearchParams(search).get('mode');
+    const status = new URLSearchParams(search).get('status');
+    const speed = new URLSearchParams(search).get('speed');
+    const humidity = new URLSearchParams(search).get('humidity');
+    
+    useEffect(()=>{
+
+        if(airQuality >= 0 && airQuality <= 50) {
+            console.log("Good");
+        } else if(airQuality >= 51 && airQuality <= 100) {
+            console.log("Moderate");
+        } else if(airQuality >= 101 && airQuality <= 150) {
+            console.log("Unhealthy for Sensitive Groups");
+        } else if(airQuality >= 151 && airQuality <= 200) {
+            console.log("Unhealthy");
+        } else if(airQuality >= 201 && airQuality <= 300) {
+            console.log("Very Unhealthy");
+        } else if(airQuality >= 301 && airQuality <= 500) {
+            console.log("Hazardous");
+        }
+
+        if(mode === "winter") {
+            console.log("Ac off krdo bhai")
+            console.log("Heater on krdo bhai")
+            console.log("Heater temp = 24 degree")
+        } else if(mode === "summer") {
+            console.log("Heater off krdo");
+            console.log("AC on krdo bhai")
+    
+            if(temp < 18){
+                console.log("Ac temp - 22 degree");
+            }
+
+            else{
+                console.log("AC temp - 24 degree");
+            }
+        } else {
+            if(temp < 21){
+                console.log("Heater on krdo");
+                console.log("Ac off krdo");
+                console.log("Exhaust off krdo");
+            }
+            else if(temp > 29){
+                console.log("Heater off krdo");
+                console.log("Ac on krdo");
+                console.log("Exhaust off krdo");
+            }
+            else{
+                console.log("Heater off krdo");
+                console.log("Ac off krdo");
+                console.log("Exhaust on krdo");
+            }
+        }
+           
+       if(humidity < 60){
+         console.log("Humidify controller - Dehumidifying");
+       }
+       else{
+         console.log("Humidify controller - Humidifying");
+       }
+
+    },[])
+
   return (
     <div className='final'>
         <div className="left">
@@ -47,7 +131,6 @@ function Final() {
                 </tr>
             </table>
             </div>
-
         </div>
 
         <div className="right">

@@ -24,3 +24,7 @@ body {
 ::-webkit-scrollbar-thumb:hover {
   background-color: #a8bbbf;
 }
+
+button {
+  cursor: pointer;
+}

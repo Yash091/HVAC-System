@@ -8,9 +8,9 @@ import Final from "./components/final/Final";
 function App() {
   return (
     <Routes>
-      <Route index element={<Homepage />} />
-      <Route path="login" element={<Login />} />
-      <Route path="welcome" element={<Welcome />} />
+      <Route index element={<Homepage />}/>
+      <Route path="login" element={<Login />}/>
+      <Route path="welcome" element={<Welcome />}/>
       <Route path="final" element={<Final />}/>
     </Routes>
   );
