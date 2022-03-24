@@ -52,6 +52,7 @@
     color: white;
     border-bottom: 2px solid white;
     margin-bottom:50px ;
+    outline:none;
 }
 
 .login-page .login-button{

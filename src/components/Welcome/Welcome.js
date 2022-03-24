@@ -1,4 +1,4 @@
-import {React , useState} from 'react';
+import {React  , useState , useRef} from 'react';
 import "./Welcome.css";
 import { CircleSlider } from "react-circle-slider";
 
@@ -17,11 +17,23 @@ const Welcome = () => {
       setInput({...input,[e.target.name]:e.target.value})
   }
   const [input , setInput] = useState(initial);
+  const [value, changeValue] = useState(0);
+  
+  const check = () => {
+    if(!input.temperature || input.temperature < -50 || input.temperature > 50) {
+      window.alert("Invalid Temperature Details");
+      setInput({...input, temperature :""} )
+    }
+    if(!input.humidity || input.humidity < 0 || input.humidity > 100){
+      window.alert("Invalid Humidity Details");
+      setInput({...input,humidity :""} )
+    }
 
-  const [value , setValue] = useState(0);
-  const handleChangeRange = (e) => {
-    // setValue(e.target.stepSize)
-    console.log(e.target);
+    if(!input.airQuality || input.airQuality < 0 || input.airQuality > 500){
+      window.alert("Invalid Air Quality Details");
+      setInput({...input,airQuality :""} )
+    }
+    
   }
 
   return (
@@ -33,7 +45,7 @@ const Welcome = () => {
           <div className="input-fields">
             <div className="input-head"> Enter Temperature in °C </div>
             <input
-              type="text"
+              type="number"
               id="temperature"
               name="temperature"
               placeholder="Allowed range is -50 °C to 50 °C"
@@ -46,7 +58,7 @@ const Welcome = () => {
               Enter Humidity
             </div>
             <input
-              type="text"
+              type="number"
               id="humidity"
               name="humidity"
               placeholder="Allowed Range is 0 to 100%"
@@ -59,7 +71,7 @@ const Welcome = () => {
               Enter Air Quality
             </div>
             <input
-              type="text"
+              type="number"
               id="airQuality"
               name="airQuality"
               placeholder="Allowed Range is 0 to 500"
@@ -100,7 +112,7 @@ const Welcome = () => {
         </div>
         <div>
           <div className={`fan ${input.status==="off" ? "hidden" : ""}`}>
-            <div className="fan-speed">Set Fan Speed{value}</div>
+            <div className="fan-speed">Set Fan Speed</div>
             <CircleSlider
               size={200}
               stepSize={1}
@@ -114,12 +126,12 @@ const Welcome = () => {
               gradientColorFrom="#1684F8"
               gradientColorTo="#0838E1"
               value={value}
-              onChange={(e) => {handleChangeRange(e)}}
+              onChange={value =>{ changeValue(value) ; setInput({...input,speed:value})}}
             />
           </div>
         </div>
       </div>
-      <button className="submit-btn">Submit</button>
+      <button className="submit-btn" onClick={() => {check()}}>Submit</button>
     </div>
   );
 }
