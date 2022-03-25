@@ -1,8 +1,7 @@
-import React from 'react'
+import {React, useState, useEffect} from 'react'
 import "./Final.css";
 import good from "./Good.png"
 import bad from "./Bad.png"
-import {useEffect} from "react"
 import {useLocation} from "react-router-dom"
 import img1 from "./1.png"
 import img2 from "./2.png"
@@ -15,13 +14,21 @@ const Final = () => {
 
     const initial = {
         quality: "0",
-        status: "on",
+        status: "On",
         mode: "auto",
         temperature : "",
         airQuality : "",
         humidity: "0",
+        acStatus:"0",
+        acTemp:"0",
+        heaterStatus:"0",
+        heaterTemp:"0",
+        exhaustStatus:"0",
+        humidityStatus:"0",
     }
     
+    // const [initial,setinitial] = useState(initial);
+
     const search = useLocation().search;
     const temp = new URLSearchParams(search).get('temp');
     const airQuality = new URLSearchParams(search).get('airQuality');
@@ -29,64 +36,68 @@ const Final = () => {
     const status = new URLSearchParams(search).get('status');
     const speed = new URLSearchParams(search).get('speed');
     const humidity = new URLSearchParams(search).get('humidity');
-    
-    useEffect(()=>{
 
-        if(airQuality >= 0 && airQuality <= 50) {
-            console.log("Good");
-        } else if(airQuality >= 51 && airQuality <= 100) {
-            console.log("Moderate");
-        } else if(airQuality >= 101 && airQuality <= 150) {
-            console.log("Unhealthy for Sensitive Groups");
-        } else if(airQuality >= 151 && airQuality <= 200) {
-            console.log("Unhealthy");
-        } else if(airQuality >= 201 && airQuality <= 300) {
-            console.log("Very Unhealthy");
-        } else if(airQuality >= 301 && airQuality <= 500) {
-            console.log("Hazardous");
+    const air = () => {
+        if(Number(airQuality) >= 0 && Number(airQuality) <= 50) {
+            initial.quality="1";
+        } else if(Number(airQuality) >= 51 && Number(airQuality) <= 100) {
+            initial.quality="2";
+        } else if(Number(airQuality) >= 101 && Number(airQuality) <= 150) {
+            initial.quality = "3";
+        } else if(Number(airQuality) >= 151 && Number(airQuality) <= 200) {
+            initial.quality="4";
+        } else if(Number(airQuality) >= 201 && Number(airQuality) <= 300) {
+            initial.quality = "5";
+        } else if(Number(airQuality) >= 301 && Number(airQuality) <= 500) {
+            initial.quality="6";
         }
-
+    }
+        
+    const weatherMode = () => {
         if(mode === "winter") {
-            console.log("Ac off krdo bhai")
-            console.log("Heater on krdo bhai")
-            console.log("Heater temp = 24 degree")
+            initial.acStatus="0";
+            initial.heaterStatus="1";
+            initial.heaterTemp = "24";
         } else if(mode === "summer") {
-            console.log("Heater off krdo");
-            console.log("AC on krdo bhai")
+            initial.heaterStatus = "0";
+            initial.acStatus = "1";
     
-            if(temp < 18){
-                console.log("Ac temp - 22 degree");
-            }
-
-            else{
-                console.log("AC temp - 24 degree");
+            if(Number(temp) < 34) {
+                initial.acTemp="24";
+            } else{
+                initial.acTemp = "24";
             }
         } else {
-            if(temp < 21){
-                console.log("Heater on krdo");
-                console.log("Ac off krdo");
-                console.log("Exhaust off krdo");
+            if(Number(temp) < 21){
+                initial.heaterStatus = "1";
+                initial.acStatus = "0";
+                initial.exhaustStatus="1";
             }
-            else if(temp > 29){
-                console.log("Heater off krdo");
-                console.log("Ac on krdo");
-                console.log("Exhaust off krdo");
+            else if(Number(temp) > 29){
+                initial.heaterStatus = "0";
+                initial.acStatus = "1";
+                initial.exhaustStatus = "0";
             }
             else{
-                console.log("Heater off krdo");
-                console.log("Ac off krdo");
-                console.log("Exhaust on krdo");
+                initial.heaterStatus = "0";
+                initial.acStatus = "0";
+                initial.exhaustStatus = "1";
             }
         }
-           
-       if(humidity < 60){
-         console.log("Humidify controller - Dehumidifying");
-       }
-       else{
-         console.log("Humidify controller - Humidifying");
-       }
 
-    },[])
+    }
+    
+    const humidityFunc = () => {
+        if(Number(humidity) < "60"){
+            initial.humidityStatus="0";
+        } else{
+            initial.humidityStatus = "1";
+        }
+    }
+    
+    air();
+    weatherMode();
+    humidityFunc();
 
   return (
     <div className='final'>
@@ -99,35 +110,35 @@ const Final = () => {
             <table cellSpacing={20}>
                 <tr>
                     <td className="table-txt">Air Conditioner</td>
-                    <td><button className="table-btn">On</button></td>
-                    <td className="table-quantity">34.5 °C</td>
+                    <td><button className={`table-btn ${initial.acStatus==="0" ? "btn-color" : ""}`}>{initial.acStatus==="1"?"On":"Off"}</button></td>
+                    <td className="table-quantity">{initial.acStatus==="1"? `${initial.acTemp}°C` :""}</td>
                 </tr>
                 <tr>
                     <td className="table-txt">Heater</td>
-                    <td><button className="table-btn">On</button></td>
-                    <td className="table-quantity">34.5 °C</td>
+                    <td><button className={`table-btn ${initial.heaterStatus === "0" ? "btn-color" : ""}`}>{initial.heaterStatus==="1"?"On":"Off"}</button></td>
+                    <td className="table-quantity">{initial.heaterStatus==="1" ? `${initial.heaterTemp}°C` : ""}</td>
                 </tr>
                 <tr>
                     <td className="table-txt">Fan</td>
-                    <td><button className="table-btn">On</button></td>
-                    <td className="table-quantity">80 RPM</td>
+                    <td><button className={`table-btn ${status === "Off" ? "btn-color" : ""}`}>{status}</button></td>
+                    <td className="table-quantity">{status === "On" ? `${speed} RPM` : ""} </td>
                 </tr>
                 <tr>
                     <td className="table-txt">Exhaust</td>
-                    <td><button className="table-btn">On</button></td>
-                    <td className="table-quantity">20 RPM</td>
+                    <td><button className={`table-btn ${initial.exhaustStatus === "0" ? "btn-color" : ""}`}>{initial.exhaustStatus==="1"?"On":"Off"}</button></td>
+                    <td className="table-quantity">{initial.exhaustStatus==="1"?"20 RPM":""}</td>
                 </tr>
                 <br/>
                 <br/>
                 <br/>
                 <tr>
                     <td className="table-txt">Humidity Controller</td>
-                    <td><button className="table-btn">Humidifying</button></td>
-                    <td className="table-quantity">56 HU</td>
+                    <td><button className={`table-btn ${initial.humidityStatus === "0" ? "btn-color" : ""}`}>{initial.humidityStatus === "0" ? "Dehumidifying" : "Humidifying"}</button></td>
+                    <td className="table-quantity">{humidity} HU</td>
                 </tr>
                 <tr>
                     <td className="table-txt">Air Quality(in ppm)</td>
-                    <td className="table-quantity">123 PPM</td>
+                    <td className="table-quantity">{airQuality} PPM</td>
                 </tr>
             </table>
             </div>
@@ -135,10 +146,20 @@ const Final = () => {
 
         <div className="right">
             <div className='logo-text'>
-                <img src={good} alt ="good"/>
-                <div className='text'>Good Quality!</div>
+                <img className="air-img" src={initial.quality==="1"?img1:(initial.quality==="2"?img2:(initial.quality==="3"?img3:(initial.quality==="4"?img4:(initial.quality==="5"?img5:img6))))} alt ="Status"/>
+                <div className='text'>{initial.quality==="1"?"Good Quality!":(initial.quality==="2"?"Moderate!":(initial.quality==="3"?"Unhealthy For Sensitive Groups!":(initial.quality==="4"?"Unhealthy!":(initial.quality==="5"?"Very Unhealthy!":"Hazardous!"))))}</div>
             </div>
-            <div className='para'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam euismod consectetur dignissim elit gravida luctus feugiat commodo sed.</div>
+            <div className='para'>{initial.quality==="1"?`Air quality is considered satisfactory, and air pollution poses little or no risk`:(initial.quality==="2"?"Air quality is acceptable; however, for some </br> pollutants there may be a moderate health concern for a very small number of people":(initial.quality==="3"?"Members of sensitive groups may experience health effects. </br>The general public is not likely to be affected":(initial.quality==="4"?"Everyone may begin to experience health effects; members of</br> sensitive groups may experience more serious health effects":(initial.quality==="5"?"Health alert: everyone may experience more serious health effects":"Health warnings of emergency conditions. </br> The entire population is more likely to be affected"))))}</div>
+            <div className="send-mail">
+                <label htmlFor = "email-id">Get result</label>
+                <input className = "receiver-email"
+                type="email"
+                id="email-id"
+                name="email-id"
+                placeholder="Enter email id"
+                />
+            </div>
+
             <button className="email-btn">Email Result</button>
         </div>
     </div>

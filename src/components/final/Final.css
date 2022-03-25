@@ -10,7 +10,7 @@
     margin: 10vh;
 }
 
-.final .left{
+.left{
     width: 50%;
     display: flex;
     flex-direction: column;
@@ -47,20 +47,23 @@
 .text{
     font-family: 'Satoshi';
     font-style: normal;
-    font-weight: 700;
-    font-size: 24px;
+    font-weight: 800;
+    font-size: 20px;
     line-height: 32px;
     padding: 5%;
+    text-align: center;
+    margin-bottom: -30px;
 }
 
 .para{
     font-family: 'Satoshi';
     font-style: normal;
     font-weight: 400;
-    font-size: 16px;
+    font-size: 18px;
     line-height: 150%;
     text-align: center;
     padding: 5%;
+    margin-bottom : 15px;
 }
 
 .left table{
@@ -103,4 +106,31 @@
     line-height: 120%;
     color: #FFFFFF;
     text-align: right;
+}
+
+.btn-color {
+    background: #AF1527!important;
+}
+
+.air-img{
+    height:25vh;
+    width:20vw; 
+}
+
+.send-mail{
+    display:flex;
+    flex-direction: column;
+}
+
+.receiver-email{
+    border: none;
+    background-color:#151515;
+    width: 30rem;
+    height: 2.6rem;
+    font-size: 1rem;
+    border-bottom: 2px solid white;
+    margin-bottom:50px ;
+    color: white;
+    outline:none;
+    width: 357px;
 }

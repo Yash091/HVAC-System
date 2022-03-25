@@ -13,7 +13,7 @@ const Welcome = () => {
       humidity : "",
       airQuality :"",
       mode: "auto",
-      status: "on",
+      status: "On",
       speed: "0",
   };
 
@@ -106,16 +106,16 @@ const Welcome = () => {
         <div className="fan-status">
           <div className="status-head">Fan Status</div>
           <div className="status-btns">
-            <button className={`stat ${input.status==="off" ? "color" : ""}`} onClick={() => {
-              setInput({...input, status:"off"})
+            <button className={`stat ${input.status==="Off" ? "color" : ""}`} onClick={() => {
+              setInput({...input, status:"Off"})
             }}>Off</button>
-            <button className={`stat ${input.status==="on" ? "color" : ""}`} onClick={() => {
-              setInput({...input, status:"on"})
+            <button className={`stat ${input.status==="On" ? "color" : ""}`} onClick={() => {
+              setInput({...input, status:"On"})
             }}>On</button>
           </div>
         </div>
         <div>
-          <div className={`fan ${input.status==="off" ? "hidden" : ""}`}>
+          <div className={`fan ${input.status==="Off" ? "hidden" : ""}`}>
             <div className="fan-speed">Set Fan Speed</div>
             <CircleSlider
               size={200}
