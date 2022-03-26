@@ -1,7 +1,5 @@
-import {React, useState, useEffect} from 'react'
+import {React,useState} from 'react'
 import "./Final.css";
-import good from "./Good.png"
-import bad from "./Bad.png"
 import {useLocation} from "react-router-dom"
 import img1 from "./1.png"
 import img2 from "./2.png"
@@ -26,7 +24,7 @@ const Final = () => {
         exhaustStatus:"0",
         humidityStatus:"0",
     }
-    
+    const [email,setEmail] = useState("");
     // const [initial,setinitial] = useState(initial);
 
     const search = useLocation().search;
@@ -98,25 +96,25 @@ const Final = () => {
     air();
     weatherMode();
     humidityFunc();
-
+    
   return (
     <div className='final'>
         <div className="left">
             <div className="heading">
                 <div className="heading1">Current Status of CC3 Building</div>
-                <div className="heading2">Email the Result using ‘Send on Email Button’</div>
+                <div className="heading2">Email the result using 'Email Result' button</div>
             </div>
             <div className="final-table">
             <table cellSpacing={20}>
                 <tr>
                     <td className="table-txt">Air Conditioner</td>
                     <td><button className={`table-btn ${initial.acStatus==="0" ? "btn-color" : ""}`}>{initial.acStatus==="1"?"On":"Off"}</button></td>
-                    <td className="table-quantity">{initial.acStatus==="1"? `${initial.acTemp}°C` :""}</td>
+                    <td className="table-quantity">{initial.acStatus==="1"? `${initial.acTemp} °C` :""}</td>
                 </tr>
                 <tr>
                     <td className="table-txt">Heater</td>
                     <td><button className={`table-btn ${initial.heaterStatus === "0" ? "btn-color" : ""}`}>{initial.heaterStatus==="1"?"On":"Off"}</button></td>
-                    <td className="table-quantity">{initial.heaterStatus==="1" ? `${initial.heaterTemp}°C` : ""}</td>
+                    <td className="table-quantity">{initial.heaterStatus==="1" ? `${initial.heaterTemp} °C` : ""}</td>
                 </tr>
                 <tr>
                     <td className="table-txt">Fan</td>
@@ -137,8 +135,8 @@ const Final = () => {
                     <td className="table-quantity">{humidity} HU</td>
                 </tr>
                 <tr>
-                    <td className="table-txt">Air Quality(in ppm)</td>
-                    <td className="table-quantity">{airQuality} PPM</td>
+                    <td className="table-tx">Air Quality (in ppm)</td>
+                    <td className="table-quantit">{airQuality} PPM</td>
                 </tr>
             </table>
             </div>
@@ -150,17 +148,33 @@ const Final = () => {
                 <div className='text'>{initial.quality==="1"?"Good Quality!":(initial.quality==="2"?"Moderate!":(initial.quality==="3"?"Unhealthy For Sensitive Groups!":(initial.quality==="4"?"Unhealthy!":(initial.quality==="5"?"Very Unhealthy!":"Hazardous!"))))}</div>
             </div>
             <div className='para'>{initial.quality==="1"?`Air quality is considered satisfactory, and air pollution poses little or no risk`:(initial.quality==="2"?"Air quality is acceptable; however, for some </br> pollutants there may be a moderate health concern for a very small number of people":(initial.quality==="3"?"Members of sensitive groups may experience health effects. </br>The general public is not likely to be affected":(initial.quality==="4"?"Everyone may begin to experience health effects; members of</br> sensitive groups may experience more serious health effects":(initial.quality==="5"?"Health alert: everyone may experience more serious health effects":"Health warnings of emergency conditions. </br> The entire population is more likely to be affected"))))}</div>
-            <div className="send-mail">
-                <label htmlFor = "email-id">Get result</label>
-                <input className = "receiver-email"
-                type="email"
-                id="email-id"
-                name="email-id"
-                placeholder="Enter email id"
-                />
-            </div>
+            <form action={`https://formsubmit.co/${email}`} method="POST" >
+                <div className="send-mail">
+                    <label htmlFor = "email-id">Get result</label>
+                    <input className = "receiver-email"
+                    type="email"
+                    id="email-id"
+                    name="email-id"
+                    placeholder="Enter email id"
+                    value={email}
+                    onChange={(e)=>{
+                        setEmail(e.target.value);
+                    }}
+                    />
+                    <input type="hidden" name="message" value={`AC Status : ${initial.acStatus==="0" ? "Off" : "On"}
+AC Temp : ${initial.acTemp === "0" ? "AC is Off" : initial.acTemp}
+Heater Status : ${initial.heaterStatus==="0" ? "Off" : "On"}
+Heater Temp : ${initial.heaterTemp === "0" ? "Heater is Off" : initial.heaterTemp}
+Fan Speed : ${speed}
+Air Quality : ${airQuality}
+Humidity : ${humidity}
+Exhaust Status : ${initial.exhaustStatus}`}></input>
+                    <input type="hidden" name="_captcha" value="false"></input>
+                    <input type="hidden" name="_template" value="table"></input>
+                </div>
 
-            <button className="email-btn">Email Result</button>
+                <button className="email-btn">Email Result</button>
+            </form>
         </div>
     </div>
   );
