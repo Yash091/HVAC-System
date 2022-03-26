@@ -147,7 +147,7 @@ const Final = () => {
                 <img className="air-img" src={initial.quality==="1"?img1:(initial.quality==="2"?img2:(initial.quality==="3"?img3:(initial.quality==="4"?img4:(initial.quality==="5"?img5:img6))))} alt ="Status"/>
                 <div className='text'>{initial.quality==="1"?"Good Quality!":(initial.quality==="2"?"Moderate!":(initial.quality==="3"?"Unhealthy For Sensitive Groups!":(initial.quality==="4"?"Unhealthy!":(initial.quality==="5"?"Very Unhealthy!":"Hazardous!"))))}</div>
             </div>
-            <div className='para'>{initial.quality==="1"?`Air quality is considered satisfactory, and air pollution poses little or no risk`:(initial.quality==="2"?"Air quality is acceptable; however, for some </br> pollutants there may be a moderate health concern for a very small number of people":(initial.quality==="3"?"Members of sensitive groups may experience health effects. </br>The general public is not likely to be affected":(initial.quality==="4"?"Everyone may begin to experience health effects; members of</br> sensitive groups may experience more serious health effects":(initial.quality==="5"?"Health alert: everyone may experience more serious health effects":"Health warnings of emergency conditions. </br> The entire population is more likely to be affected"))))}</div>
+            <div className='para'>{initial.quality==="1"?`Air quality is considered satisfactory, and air pollution poses little or no risk`:(initial.quality==="2"?"Air quality is acceptable; however, for some pollutants there may be a moderate health concern for a very small number of people":(initial.quality==="3"?"Members of sensitive groups may experience health effects. The general public is not likely to be affected":(initial.quality==="4"?"Everyone may begin to experience health effects; members of  sensitive groups may experience more serious health effects":(initial.quality==="5"?"Health alert: everyone may experience more serious health effects":"Health warnings of emergency conditions. The entire population is more likely to be affected"))))}</div>
             <form action={`https://formsubmit.co/${email}`} method="POST" >
                 <div className="send-mail">
                     <label htmlFor = "email-id">Get result</label>
@@ -162,14 +162,16 @@ const Final = () => {
                     }}
                     />
                     <input type="hidden" name="message" value={`AC Status : ${initial.acStatus==="0" ? "Off" : "On"}
-AC Temp : ${initial.acTemp === "0" ? "AC is Off" : initial.acTemp}
+AC Temp : ${initial.acTemp === "0" ? "AC is Off" : initial.acTemp} °C
 Heater Status : ${initial.heaterStatus==="0" ? "Off" : "On"}
-Heater Temp : ${initial.heaterTemp === "0" ? "Heater is Off" : initial.heaterTemp}
-Fan Speed : ${speed}
-Air Quality : ${airQuality}
-Humidity : ${humidity}
-Exhaust Status : ${initial.exhaustStatus}`}></input>
+Heater Temp : ${initial.heaterTemp === "0" ? "Heater is Off" : initial.heaterTemp} °C
+Fan Speed : ${speed} RPM 
+Air Quality : ${airQuality} PPM
+Humidity : ${humidity} HU
+Exhaust Status : ${initial.exhaustStatus}
+Description : ${initial.quality==="1"?`Air quality is considered satisfactory, and air pollution poses little or no risk`:(initial.quality==="2"?"Air quality is acceptable; however, for some  pollutants there may be a moderate health concern for a very small number of people":(initial.quality==="3"?"Members of sensitive groups may experience health effects.The general public is not likely to be affected":(initial.quality==="4"?"Everyone may begin to experience health effects; members of sensitive groups may experience more serious health effects":(initial.quality==="5"?"Health alert: everyone may experience more serious health effects":"Health warnings of emergency conditions. The entire population is more likely to be affected"))))}`}></input>
                     <input type="hidden" name="_captcha" value="false"></input>
+                    <input type="hidden" name="_subject" value="New submission!"></input>
                     <input type="hidden" name="_template" value="table"></input>
                 </div>
 
