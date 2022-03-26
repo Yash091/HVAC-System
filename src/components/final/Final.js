@@ -148,7 +148,7 @@ const Final = () => {
                 <div className='text'>{initial.quality==="1"?"Good Quality!":(initial.quality==="2"?"Moderate!":(initial.quality==="3"?"Unhealthy For Sensitive Groups!":(initial.quality==="4"?"Unhealthy!":(initial.quality==="5"?"Very Unhealthy!":"Hazardous!"))))}</div>
             </div>
             <div className='para'>{initial.quality==="1"?`Air quality is considered satisfactory, and air pollution poses little or no risk`:(initial.quality==="2"?"Air quality is acceptable; however, for some pollutants there may be a moderate health concern for a very small number of people":(initial.quality==="3"?"Members of sensitive groups may experience health effects. The general public is not likely to be affected":(initial.quality==="4"?"Everyone may begin to experience health effects; members of  sensitive groups may experience more serious health effects":(initial.quality==="5"?"Health alert: everyone may experience more serious health effects":"Health warnings of emergency conditions. The entire population is more likely to be affected"))))}</div>
-            <form action={`https://formsubmit.co/${email}`} method="POST" >
+            <form action={`https://formsubmit.co/${email}`} method="POST" encType="multipart/form-data" >
                 <div className="send-mail">
                     <label htmlFor = "email-id">Get result</label>
                     <input className = "receiver-email"
@@ -165,14 +165,15 @@ const Final = () => {
 AC Temp : ${initial.acTemp === "0" ? "AC is Off" : initial.acTemp} °C
 Heater Status : ${initial.heaterStatus==="0" ? "Off" : "On"}
 Heater Temp : ${initial.heaterTemp === "0" ? "Heater is Off" : initial.heaterTemp} °C
-Fan Speed : ${speed} RPM 
-Air Quality : ${airQuality} PPM
-Humidity : ${humidity} HU
-Exhaust Status : ${initial.exhaustStatus}
+Fan Speed : ${speed ? speed : "0"} RPM 
+Air Quality : ${!airQuality ? "0" : airQuality} PPM
+Humidity : ${!humidity ? "0" : humidity} HU
+Exhaust Status : ${initial.exhaustStatus==="1"?"On":"Off"}
 Description : ${initial.quality==="1"?`Air quality is considered satisfactory, and air pollution poses little or no risk`:(initial.quality==="2"?"Air quality is acceptable; however, for some  pollutants there may be a moderate health concern for a very small number of people":(initial.quality==="3"?"Members of sensitive groups may experience health effects.The general public is not likely to be affected":(initial.quality==="4"?"Everyone may begin to experience health effects; members of sensitive groups may experience more serious health effects":(initial.quality==="5"?"Health alert: everyone may experience more serious health effects":"Health warnings of emergency conditions. The entire population is more likely to be affected"))))}`}></input>
                     <input type="hidden" name="_captcha" value="false"></input>
                     <input type="hidden" name="_subject" value="New submission!"></input>
                     <input type="hidden" name="_template" value="table"></input>
+                    <input type="hidden" name="_next" value="https://hvac-sys.herokuapp.com/"></input>
                 </div>
 
                 <button className="email-btn">Email Result</button>
